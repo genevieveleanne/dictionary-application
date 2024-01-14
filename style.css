@@ -5,6 +5,11 @@ form {
   text-align: center;
 }
 
+h2,
+p {
+  color: whitesmoke;
+}
+
 body,
 .search-button {
   color: rgb(6, 24, 190);
@@ -21,6 +26,11 @@ body,
   width: 280px;
 }
 
+p:hover,
+.search-button:hover {
+  cursor: pointer;
+}
+
 body {
   font-family: "DM Mono", monospace;
   background-color: rgb(224, 255, 255);
@@ -31,7 +41,6 @@ h1 {
 }
 
 h2 {
-  color: whitesmoke;
   text-transform: capitalize;
 }
 
@@ -41,6 +50,11 @@ h3 {
 
 form {
   margin-top: 41px;
+}
+
+p {
+  margin-top: 22px;
+  text-decoration: underline;
 }
 
 .search-bar {
@@ -57,7 +71,6 @@ form {
 .search-button:hover {
   background-color: rgb(6, 24, 190);
   color: #fff;
-  cursor: pointer;
 }
 
 .word-container {
@@ -67,4 +80,5 @@ form {
   margin: 0 auto;
   margin-top: 45px;
   padding: 25px 27px;
+  text-align: center;
 }
