@@ -14,17 +14,15 @@ let form = document.querySelector("form");
 form.addEventListener("submit", retrieveUserInput);
 
 //Display word on page load
-function searchWord(word) {
-  let wordDefinition = `${apiBase}/${word}`;
-  axios.get(wordDefinition).then(displayUserInput);
+function searchWord(input) {
+  let word = `${apiBase}/${input}`;
+  axios.get(word).then(displayUserInput);
 }
 
-searchWord("sunrise");
+searchWord("read");
 
 //Display word definition and pronunciation
 function displayUserInput(response) {
-  console.log(response.data);
-
   let word = document.querySelector("h2");
   word.innerHTML = response.data[0].word;
 
@@ -36,6 +34,8 @@ function displayUserInput(response) {
     let pronunciation = document.querySelector("#pronunciation");
     pronunciation.innerHTML = `<a href="${pronunciationLink}" target="_blank">Pronunciation</a>`;
   }
+
+  wordDefinition(response);
 }
 
 //If phonetics[1] is null, then inject link from phonetics[0]
@@ -44,4 +44,9 @@ function pronunciationDisplay(response) {
 
   let pronunciation = document.querySelector("#pronunciation");
   pronunciation.innerHTML = `<a href="${pronunciationLink}" target="_blank">Pronunciation</a>`;
+}
+
+//Antonyms, definition, part of speech, synonyms
+function wordDefinition(response) {
+  console.log(response.data[0].meanings);
 }
