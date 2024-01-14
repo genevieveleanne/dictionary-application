@@ -42,14 +42,29 @@ h1 {
 
 h2 {
   text-transform: capitalize;
+  font-size: 35px;
 }
 
 h3 {
   margin-top: 20px;
 }
 
+h4 {
+  font-size: 32px;
+  text-decoration: underline;
+}
+
 form {
   margin-top: 41px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 5px;
 }
 
 .search-bar {
@@ -79,5 +94,7 @@ form {
 }
 
 .meanings-display {
-  border: 2px solid lightseagreen;
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 48px;
 }

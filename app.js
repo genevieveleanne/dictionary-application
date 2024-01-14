@@ -46,31 +46,37 @@ function pronunciationDisplay(response) {
   pronunciation.innerHTML = `<a href="${pronunciationLink}" target="_blank">Pronunciation</a>`;
 }
 
-//Antonyms, definition, part of speech, and synonyms
+//Display part of speech. Initial display of antonyms, definition, and synonyms
 function wordDefinitionDisplay(response) {
   console.log(response.data[0].meanings);
 
   let wordContainer = document.querySelector("#definition-display");
 
-  let wordHTML = `<div class="meanings-display">`;
+  let wordHTML = `<div>`;
 
   function displayDefinition(word, index) {
     if (index < 6) {
       wordHTML =
         wordHTML +
-        `<h4>${word.partOfSpeech}</h4>
+        `<div class="meanings-display">
+        <h4>${word.partOfSpeech}</h4>
 
         <ul>
-        <li>Definition:
+        <li>
+        <strong>Definition:</strong>
+
         </li>
 
-        <li>Example Sentence:
+        <li>
+        <strong>Example Sentence:</strong>
         </li>
 
-        <li>Synonyms:
+        <li>
+        <strong>Synonyms:</strong>
         </li>
 
-        <li>Antonyms:
+        <li>
+        <strong>Antonyms:</strong>
         </li>
         </ul>`;
     }
@@ -82,3 +88,5 @@ function wordDefinitionDisplay(response) {
   wordHTML = wordHTML + `</div>`;
   wordContainer.innerHTML = wordHTML;
 }
+
+//Antonyms, Definitions, Synonyms
