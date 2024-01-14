@@ -22,17 +22,20 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="header">
-        <h1>Dictionary</h1>
-        <h3>Learn a new word today!</h3>
-      </div>
+      <h1>Dictionary</h1>
+      <h3>Learn a new word today!</h3>
 
       <form>
-        <input type="text" placeholder="Type in a word" />
-        <input type="submit" value="Search" />
+        <input
+          type="text"
+          placeholder="Type in a word..."
+          autocomplete="off"
+          class="shadow-sm search-bar"
+        />
+        <input type="submit" value="Search" class="shadow-sm search-button" />
       </form>
 
-      <div class="word">
+      <div class="shadow word-container">
         <h2>Sunrise</h2>
       </div>
     </div>
