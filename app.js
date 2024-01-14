@@ -14,10 +14,15 @@ function retrieveUserInput(event) {
 let form = document.querySelector("form");
 form.addEventListener("submit", retrieveUserInput);
 
-//Display Word Definition
+//Display word definition, pronunciation, etc.
 function displayUserInput(response) {
   console.log(response.data);
 
-  let h2 = document.querySelector("h2");
-  h2.innerHTML = response.data[0].word;
+  let word = document.querySelector("h2");
+  word.innerHTML = response.data[0].word;
+
+  let pronunciationLink = `${response.data[0].phonetics[1].audio}`;
+
+  let pronunciation = document.querySelector("#pronunciation");
+  pronunciation.innerHTML = `<a href="${pronunciationLink}" target="_blank">Pronunciation</a>`;
 }
