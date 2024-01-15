@@ -1,4 +1,4 @@
-//SheCodes API key and basepoint
+//API key and basepoint
 let apiKey = "1bac80fa0c32ft537387a483f19bf3fo";
 let apiBase = "https://api.shecodes.io/dictionary/v1/define?word";
 
@@ -33,7 +33,7 @@ function displayWord(response) {
   wordDefinitionDisplay(response);
 }
 
-//Display part of speech, definition, synonyms, and example sentence
+//Display part of speech, definition, synonyms, antonyms, and example sentence
 function wordDefinitionDisplay(response) {
   let wordContainer = document.querySelector("#meanings-display");
 
@@ -55,9 +55,14 @@ function wordDefinitionDisplay(response) {
         <strong>Synonyms:</strong>
         ${displaySynonyms(meaning)}
         </li>
+
+        <li>
+        <strong>Antonyms:</strong>
+        ${displayAntonyms(meaning)}
+        </li>
         
         <li>
-        <strong>Example:</strong>
+        <strong>Example Sentence:</strong>
         ${displayExampleSentence(meaning)}
         </li>
         </ul>`;
@@ -69,6 +74,16 @@ function wordDefinitionDisplay(response) {
         return "No synonyms";
       } else {
         return synonyms;
+      }
+    }
+
+    function displayAntonyms(meaning) {
+      let antonyms = meaning.antonyms;
+
+      if (antonyms === null) {
+        return "No antonyms";
+      } else {
+        return antonyms;
       }
     }
 
@@ -89,5 +104,3 @@ function wordDefinitionDisplay(response) {
   wordHTML = wordHTML + `</div>`;
   wordContainer.innerHTML = wordHTML;
 }
-
-//Bugs: Add antonyms.
