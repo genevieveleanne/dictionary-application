@@ -57,8 +57,6 @@ function displayPronunciation(response) {
 
 //Display part of speech, definition, synonyms, and antonyms
 function wordDefinitionDisplay(response) {
-  console.log(response.data.meanings);
-
   let wordContainer = document.querySelector("#meanings-display");
 
   let wordHTML = `<div>`;
@@ -77,8 +75,18 @@ function wordDefinitionDisplay(response) {
 
         <li>
         <strong>Synonyms:</strong>
+        ${meaning.synonyms}
+        </li>
+        
+        <li>
+        <strong>Example:</strong>
+        ${meaning.example}
         </li>
         </ul>`;
+
+    if (meaning.synonyms === null) {
+      return "";
+    }
   }
 
   //Loop through each word meaning
