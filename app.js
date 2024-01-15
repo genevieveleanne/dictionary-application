@@ -60,11 +60,10 @@ function wordDefinitionDisplay(response) {
 
   let wordHTML = `<div>`;
 
-  function displayMeanings(meaning, index) {
-    if (index < 20) {
-      wordHTML =
-        wordHTML +
-        `<div class="meanings-display">
+  function displayMeanings(meaning) {
+    wordHTML =
+      wordHTML +
+      `<div class="meanings-display">
         <h4>${meaning.partOfSpeech}</h4>
 
         <ul>
@@ -74,25 +73,9 @@ function wordDefinitionDisplay(response) {
         </li>
 
         <li>
-        <strong>Example Sentence:</strong>
-        ${meaning.example}
-        </li>
-
-        <li>
         <strong>Synonyms:</strong>
         </li>
         </ul>`;
-    }
-
-    //If example sentence is null, then display "No example sentence"
-    if (meaning.example === null) {
-      let string = null;
-      string = String(string);
-      string = `No example sentence`;
-      return string;
-    } else {
-      return meaning.example;
-    }
   }
 
   //Loop through each word meaning
@@ -103,5 +86,4 @@ function wordDefinitionDisplay(response) {
   wordContainer.innerHTML = wordHTML;
 }
 
-//BUGS: Fix null on example sentence
-//Look up map function to loop through subarray
+//BUGS: Look up map function to loop through subarray
