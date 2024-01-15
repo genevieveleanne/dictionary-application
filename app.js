@@ -1,5 +1,6 @@
-//API basepoint
-let apiBase = "https://api.dictionaryapi.dev/api/v2/entries/en";
+//API key and basepoint
+let apiKey = "1bac80fa0c32ft537387a483f19bf3fo";
+let apiBase = "https://api.shecodes.io/dictionary/v1/define?word";
 
 //User submits form
 function retrieveUserInput(event) {
@@ -15,7 +16,7 @@ form.addEventListener("submit", retrieveUserInput);
 
 //Display word on page load
 function searchWord(input) {
-  let word = `${apiBase}/${input}`;
+  let word = `${apiBase}=${input}&key=${apiKey}`;
   axios.get(word).then(displayUserInput);
 }
 
@@ -23,39 +24,27 @@ searchWord("read");
 
 //Display word definition and pronunciation
 function displayUserInput(response) {
+  console.log(response.data);
+
   let word = document.querySelector("h2");
-  word.innerHTML = response.data[0].word;
+  word.innerHTML = response.data.word;
 
-  let pronunciationLink = `${response.data[0].phonetics[1].audio}`;
-
-  if (pronunciationLink === "") {
-    pronunciationDisplay(response);
-  } else {
-    let pronunciation = document.querySelector("#pronunciation");
-    pronunciation.innerHTML = `<a href="${pronunciationLink}" target="_blank">Pronunciation</a>`;
-  }
+  let phonetics = document.querySelector("#phonetics");
+  phonetics.innerHTML = `"${response.data.phonetic}"`;
 
   wordDefinitionDisplay(response);
-}
-
-//If phonetics[1] is null, then inject link from phonetics[0]
-function pronunciationDisplay(response) {
-  let pronunciationLink = `${response.data[0].phonetics[0].audio}`;
-
-  let pronunciation = document.querySelector("#pronunciation");
-  pronunciation.innerHTML = `<a href="${pronunciationLink}" target="_blank">Pronunciation</a>`;
 }
 
 //Display part of speech. Initial display of antonyms, definition, and synonyms
 function wordDefinitionDisplay(response) {
   console.log(response.data[0].meanings);
 
-  let wordContainer = document.querySelector("#definition-display");
+  let wordContainer = document.querySelector("#meanings-display");
 
   let wordHTML = `<div>`;
 
-  function displayDefinition(word, index) {
-    if (index < 6) {
+  function displayMeanings(word, index) {
+    if (index < 20) {
       wordHTML =
         wordHTML +
         `<div class="meanings-display">
@@ -64,7 +53,7 @@ function wordDefinitionDisplay(response) {
         <ul>
         <li>
         <strong>Definition:</strong>
-
+        
         </li>
 
         <li>
@@ -82,8 +71,8 @@ function wordDefinitionDisplay(response) {
     }
   }
 
-  let wordDefinition = response.data[0].meanings;
-  wordDefinition.forEach(displayDefinition);
+  let meanings = response.data[0].meanings;
+  meanings.forEach(displayMeanings);
 
   wordHTML = wordHTML + `</div>`;
   wordContainer.innerHTML = wordHTML;
