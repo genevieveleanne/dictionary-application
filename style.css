@@ -6,7 +6,7 @@ form {
 }
 
 h2,
-p {
+a {
   color: whitesmoke;
 }
 
@@ -24,6 +24,11 @@ body,
 .search-bar,
 .word-container {
   width: 280px;
+}
+
+a:hover,
+.search-button:hover {
+  cursor: pointer;
 }
 
 body {
@@ -76,7 +81,6 @@ li {
 .search-button:hover {
   background-color: rgb(6, 24, 190);
   color: #fff;
-  cursor: pointer;
 }
 
 .word-container {

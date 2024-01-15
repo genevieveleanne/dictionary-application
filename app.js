@@ -1,6 +1,9 @@
-//API key and basepoint
+//SheCodes API key and basepoint
 let apiKey = "1bac80fa0c32ft537387a483f19bf3fo";
 let apiBase = "https://api.shecodes.io/dictionary/v1/define?word";
+
+//Free Dictionary API base
+let secondApiBase = "https://api.dictionaryapi.dev/api/v2/entries/en";
 
 //User submits form
 function retrieveUserInput(event) {
@@ -17,20 +20,36 @@ form.addEventListener("submit", retrieveUserInput);
 //Display word on page load
 function searchWord(input) {
   let word = `${apiBase}=${input}&key=${apiKey}`;
-  axios.get(word).then(displayUserInput);
+  axios.get(word).then(displayWord);
+
+  let phonetics = `${secondApiBase}/${input}`;
+  axios.get(phonetics).then(displayPronunciation);
 }
 
 searchWord("read");
 
-//Display word definition and pronunciation
-function displayUserInput(response) {
+//Display user's word
+function displayWord(response) {
   let word = document.querySelector("h2");
   word.innerHTML = response.data.word;
 
-  let phonetics = document.querySelector("#phonetics");
-  phonetics.innerHTML = `"${response.data.phonetic}"`;
-
   wordDefinitionDisplay(response);
+}
+
+//Display word pronunciation
+function displayPronunciation(response) {
+  let pronunciationLink = `${response.data[0].phonetics[1].audio}`;
+
+  if (pronunciationLink === "") {
+    let pronunciationHTML = document.querySelector("#pronunciation");
+    pronunciationHTML.innerHTML = `<a href="${response.data[0].phonetics[0].audio}" target="_blank">
+    Pronunciation
+    </a>`;
+  } else {
+    let pronunciationHTML = document.querySelector("#pronunciation");
+    pronunciationHTML.innerHTML = `<a href="${pronunciationLink}" target="_blank">
+    Pronunciation</a>`;
+  }
 }
 
 //Display part of speech, definition, synonyms, and antonyms
@@ -62,12 +81,17 @@ function wordDefinitionDisplay(response) {
         <li>
         <strong>Synonyms:</strong>
         </li>
-
-        <li>
-        <strong>Antonyms:</strong>
-        ${meaning.antonyms}
-        </li>
         </ul>`;
+    }
+
+    //If example sentence is null, then display "No example sentence"
+    if (meaning.example === null) {
+      let string = null;
+      string = String(string);
+      string = `No example sentence`;
+      return string;
+    } else {
+      return meaning.example;
     }
   }
 
@@ -79,5 +103,5 @@ function wordDefinitionDisplay(response) {
   wordContainer.innerHTML = wordHTML;
 }
 
-//BUGS: Fix null on example sentence and antonyms.
+//BUGS: Fix null on example sentence
 //Look up map function to loop through subarray
