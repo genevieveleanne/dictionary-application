@@ -26,9 +26,9 @@ function searchWord(input) {
   axios.get(phonetics).then(displayPronunciation);
 }
 
-searchWord("read");
+searchWord("learn");
 
-//Display user's word
+//Display user's word and word phonetic
 function displayWord(response) {
   let word = document.querySelector("h2");
   word.innerHTML = response.data.word;
@@ -55,7 +55,7 @@ function displayPronunciation(response) {
   }
 }
 
-//Display part of speech, definition, synonyms, and antonyms
+//Display part of speech, definition, synonyms, and example sentence
 function wordDefinitionDisplay(response) {
   let wordContainer = document.querySelector("#meanings-display");
 
@@ -72,24 +72,39 @@ function wordDefinitionDisplay(response) {
         <strong>Definition:</strong>
         ${meaning.definition}
         </li>
-
+        
         <li>
         <strong>Synonyms:</strong>
-        ${meaning.synonyms}
+        ${displaySynonyms(meaning)}
         </li>
         
         <li>
         <strong>Example:</strong>
-        ${meaning.example}
+        ${displayExampleSentence(meaning)}
         </li>
         </ul>`;
 
-    if (meaning.synonyms === null) {
-      return "";
+    function displaySynonyms(meaning) {
+      let synonyms = meaning.synonyms;
+
+      if (synonyms === null) {
+        return "No synonyms";
+      } else {
+        return synonyms;
+      }
+    }
+
+    function displayExampleSentence(meaning) {
+      let example = meaning.example;
+
+      if (example === null) {
+        return "No example sentence";
+      } else {
+        return example;
+      }
     }
   }
 
-  //Loop through each word meaning
   let meanings = response.data.meanings;
   meanings.forEach(displayMeanings);
 
