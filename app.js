@@ -33,6 +33,9 @@ function displayWord(response) {
   let word = document.querySelector("h2");
   word.innerHTML = response.data.word;
 
+  let phonetics = document.querySelector("#phonetics");
+  phonetics.innerHTML = `"${response.data.phonetic}"`;
+
   wordDefinitionDisplay(response);
 }
 
@@ -85,5 +88,3 @@ function wordDefinitionDisplay(response) {
   wordHTML = wordHTML + `</div>`;
   wordContainer.innerHTML = wordHTML;
 }
-
-//BUGS: Look up map function to loop through subarray
