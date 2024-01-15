@@ -2,9 +2,6 @@
 let apiKey = "1bac80fa0c32ft537387a483f19bf3fo";
 let apiBase = "https://api.shecodes.io/dictionary/v1/define?word";
 
-//Free Dictionary API base
-let secondApiBase = "https://api.dictionaryapi.dev/api/v2/entries/en";
-
 //User submits form
 function retrieveUserInput(event) {
   event.preventDefault();
@@ -21,9 +18,6 @@ form.addEventListener("submit", retrieveUserInput);
 function searchWord(input) {
   let word = `${apiBase}=${input}&key=${apiKey}`;
   axios.get(word).then(displayWord);
-
-  let phonetics = `${secondApiBase}/${input}`;
-  axios.get(phonetics).then(displayPronunciation);
 }
 
 searchWord("learn");
@@ -37,22 +31,6 @@ function displayWord(response) {
   phonetics.innerHTML = `"${response.data.phonetic}"`;
 
   wordDefinitionDisplay(response);
-}
-
-//Display word pronunciation
-function displayPronunciation(response) {
-  let pronunciationLink = `${response.data[0].phonetics[1].audio}`;
-
-  if (pronunciationLink === "") {
-    let pronunciationHTML = document.querySelector("#pronunciation");
-    pronunciationHTML.innerHTML = `<a href="${response.data[0].phonetics[0].audio}" target="_blank">
-    Pronunciation
-    </a>`;
-  } else {
-    let pronunciationHTML = document.querySelector("#pronunciation");
-    pronunciationHTML.innerHTML = `<a href="${pronunciationLink}" target="_blank">
-    Pronunciation</a>`;
-  }
 }
 
 //Display part of speech, definition, synonyms, and example sentence
@@ -112,4 +90,4 @@ function wordDefinitionDisplay(response) {
   wordContainer.innerHTML = wordHTML;
 }
 
-//Bugs: Remove pronuciation because it doesn't work sometimes. Add antonyms.
+//Bugs: Add antonyms.
