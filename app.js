@@ -111,3 +111,5 @@ function wordDefinitionDisplay(response) {
   wordHTML = wordHTML + `</div>`;
   wordContainer.innerHTML = wordHTML;
 }
+
+//Bugs: Remove pronuciation because it doesn't work sometimes. Add antonyms.
