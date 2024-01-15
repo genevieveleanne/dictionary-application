@@ -24,8 +24,6 @@ searchWord("read");
 
 //Display word definition and pronunciation
 function displayUserInput(response) {
-  console.log(response.data);
-
   let word = document.querySelector("h2");
   word.innerHTML = response.data.word;
 
@@ -35,29 +33,30 @@ function displayUserInput(response) {
   wordDefinitionDisplay(response);
 }
 
-//Display part of speech. Initial display of antonyms, definition, and synonyms
+//Display part of speech, definition, synonyms, and antonyms
 function wordDefinitionDisplay(response) {
-  console.log(response.data[0].meanings);
+  console.log(response.data.meanings);
 
   let wordContainer = document.querySelector("#meanings-display");
 
   let wordHTML = `<div>`;
 
-  function displayMeanings(word, index) {
+  function displayMeanings(meaning, index) {
     if (index < 20) {
       wordHTML =
         wordHTML +
         `<div class="meanings-display">
-        <h4>${word.partOfSpeech}</h4>
+        <h4>${meaning.partOfSpeech}</h4>
 
         <ul>
         <li>
         <strong>Definition:</strong>
-        
+        ${meaning.definition}
         </li>
 
         <li>
         <strong>Example Sentence:</strong>
+        ${meaning.example}
         </li>
 
         <li>
@@ -66,16 +65,19 @@ function wordDefinitionDisplay(response) {
 
         <li>
         <strong>Antonyms:</strong>
+        ${meaning.antonyms}
         </li>
         </ul>`;
     }
   }
 
-  let meanings = response.data[0].meanings;
+  //Loop through each word meaning
+  let meanings = response.data.meanings;
   meanings.forEach(displayMeanings);
 
   wordHTML = wordHTML + `</div>`;
   wordContainer.innerHTML = wordHTML;
 }
 
-//Antonyms, Definitions, Synonyms
+//BUGS: Fix null on example sentence and antonyms.
+//Look up map function to loop through subarray

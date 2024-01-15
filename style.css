@@ -59,7 +59,7 @@ ul {
 }
 
 li {
-  margin: 5px;
+  margin: 7px;
 }
 
 .search-bar {
@@ -90,7 +90,7 @@ li {
 }
 
 .meanings-display {
-  width: 800px;
+  width: 550px;
   margin: 0 auto;
   margin-top: 48px;
 }
